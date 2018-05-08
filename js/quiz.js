@@ -1,33 +1,57 @@
 var QuestionAnswers = [
-    ['Who is the president of the US?', 'Donald Trump'],
+    ['Which is the largest country by area?', 'Russia'],
     ['How many states are there in the US?', 50],
-    ['Which city does the President live in?', 'Washington DC']
+    ['What is the biggest mammal?', 'Blue Whale']
 ];
 
 function print(message) {
-    document.write(message)
+    document.write(message);
 }
-var i = 0;
 var correctAnswers = 0;
 var question;
 var response;
+var correctAns = [];
+var wrongAns = [];
+
+var i = 0;
 while (i < QuestionAnswers.length) {
-    question = prompt(QuestionAnswers[i][0]);
-    response = (question);
+    var question = QuestionAnswers[i][0];
     var answer = QuestionAnswers[i][1];
+    response = prompt(question);
 
     if (isNaN(answer)) { // is Not a number?
         // we assume it's a string
         if (response.toUpperCase() === answer.toUpperCase()) {
+            //correct
             correctAnswers++;
+            correctAns.push(question);
+
+        } else {
+            wrongAns.push(question);
         }
     } else {
         if (parseInt(response) === answer) {
             correctAnswers++;
+            correctAns.push(question);
+        } else {
+            wrongAns.push(question);
         }
     }
 
     i++;
 }
 
-print("You have got " + correctAnswers + " answers correct");
+print("<p> You have got " + correctAnswers + " answers correct </p>" );
+print("<h2> Questions that were correct:</h2>");
+print("<ol>");
+for(var i = 0; i < correctAns.length; i++) {
+    print("<li>" + correctAns[i] + "</li>");
+}
+print("</ol>");
+
+print("<h2> Questions that were wrong:</h2>");
+print("<ol>");
+for(var i = 0; i < wrongAns.length; i++) {
+    print("<li>" + wrongAns[i] + "</li>");
+}
+print("</ol>");
